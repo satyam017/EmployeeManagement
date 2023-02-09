@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Login from "./component/auth/Login";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Dashboard from "./component/dashboard/Dashboard";
+import Protected from "./component/protected/Protected";
+import User from "./component/User/User";
+import Attendance from "./component/attendance/Attendance";
+import SideBar from "./component/sidebar/SideBar";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+
+      <BrowserRouter>
+        {window.localStorage.getItem("login") === "true" ? <SideBar /> : ""}
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/dashboard" element={<Protected Cmp={Dashboard} />} />
+          <Route path="/attendance" element={<Protected Cmp={Attendance} />} />
+          <Route path="/user" element={<Protected Cmp={User} />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
