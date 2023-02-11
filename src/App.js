@@ -6,21 +6,29 @@ import Protected from "./component/protected/Protected";
 import User from "./component/User/User";
 import Attendance from "./component/attendance/Attendance";
 import SideBar from "./component/sidebar/SideBar";
+import Theme, { ThemeContext } from "./component/context/ThemeContext";
+import { useContext, useEffect } from "react";
 
 function App() {
-  return (
-    <>
+ 
 
-      <BrowserRouter>
-        {window.localStorage.getItem("login") === "true" ? <SideBar /> : ""}
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/dashboard" element={<Protected Cmp={Dashboard} />} />
-          <Route path="/attendance" element={<Protected Cmp={Attendance} />} />
-          <Route path="/user" element={<Protected Cmp={User} />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+  const {theme,setTheme} = useContext(ThemeContext)
+  return (
+    
+      <div className={theme === "dark" ? "dark" : ""}>
+        <BrowserRouter>
+          {window.localStorage.getItem("login") === "true" ? <SideBar /> : ""}
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/dashboard" element={<Protected Cmp={Dashboard} />} />
+            <Route
+              path="/attendance"
+              element={<Protected Cmp={Attendance} />}
+            />
+            <Route path="/user" element={<Protected Cmp={User} />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
   );
 }
 
