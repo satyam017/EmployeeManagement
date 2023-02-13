@@ -10,6 +10,7 @@ const {theme,setTheme} = useContext(ThemeContext)
   useEffect(() => {
     window.localStorage.setItem("_x_darkMode_on", mode == 'sun' ? 'false' : 'true');
   }, []);
+
   return (
     <>
       {/* Nav Bar */}
